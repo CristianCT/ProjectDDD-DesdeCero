@@ -24,12 +24,12 @@ public class Empleado extends Entity<IdEmpleado> {
         this.telefono = telefono;
     }
 
-    public void cambiarCargo(){
-
+    public void cambiarCargo(Cargo cargo){
+        this.cargo = cargo;
     }
 
-    public void cambiarNumeroTelefonico(){
-
+    public void cambiarNumeroTelefonico(Telefono telefono){
+        this.telefono = telefono;
     }
 
     public Nombre nombre() {

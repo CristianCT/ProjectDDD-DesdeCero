@@ -1,5 +1,6 @@
 package cine;
 
+import cine.values.IdAsiento;
 import cine.values.IdSala;
 import cine.values.Numeral;
 import cine.values.TipoProyeccion;
@@ -21,16 +22,12 @@ public class Sala extends Entity<IdSala> {
         this.asientos = new HashSet<>();
     }
 
-    public void agregarAsiento(){
-
+    public void agregarAsiento(Asiento asiento){
+        this.asientos.add(asiento);
     }
 
-    public void cambiarTipoProyeccion(){
-
-    }
-
-    public void remplazarAsiento(){
-
+    public void cambiarTipoProyeccion(TipoProyeccion tipoProyeccion){
+        this.tipoProyeccion = tipoProyeccion;
     }
 
     public Numeral numeral() {

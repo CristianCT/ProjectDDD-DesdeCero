@@ -19,8 +19,8 @@ public class Asiento extends Entity<IdAsiento> {
         this.tipoAsiento = tipoAsiento;
     }
 
-    public void cambiarTipoAsiento(){
-
+    public void cambiarTipoAsiento(TipoAsiento tipoAsiento){
+        this.tipoAsiento = tipoAsiento;
     }
 
     public Fila fila() {

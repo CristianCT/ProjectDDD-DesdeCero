@@ -1,58 +1,92 @@
 package cine;
 
+import cine.events.*;
 import cine.values.*;
 import co.com.sofka.domain.generic.AggregateEvent;
+import genericos.Apellidos;
+import genericos.FechaNacimiento;
+import genericos.Nombre;
+import genericos.Telefono;
 import pelicula.values.IdPelicula;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Cine extends AggregateEvent<IdCine> {
 
-    private final Ubicacion ubicacion;
-    private Horario horario;
-    private Set<IdPelicula> cartelera;
-    private Set<Empleado> empleados;
-    private Set<Sala> salas;
+    protected Ubicacion ubicacion;
+    protected Horario horario;
+    protected Set<IdPelicula> cartelera;
+    protected Set<Empleado> empleados;
+    protected Set<Sala> salas;
 
     public Cine(IdCine entityId, Ubicacion ubicacion, Horario horario) {
         super(entityId);
-        this.ubicacion = ubicacion;
-        this.horario = horario;
-        this.cartelera = new HashSet<>();
-        this.empleados = new HashSet<>();
-        this.salas = new HashSet<>();
+        subscribe(new CineChange(this));
+        appendChange(new CineCreado(ubicacion, horario)).apply();
     }
 
-    public void remplazarHorario(){
-
+    public void agregarSala(Numeral numeral, TipoProyeccion tipoProyeccion){
+        appendChange(new SalaAgregada(new IdSala(), numeral, tipoProyeccion));
     }
 
-    public void agregarEmpleado(){
-
+    public void agregarPelicula(IdPelicula idPelicula){
+        appendChange(new PeliculaAgregada(idPelicula)).apply();
     }
 
-    public void agregarAsientoASala(){
-
+    public void removerPelicula(IdPelicula idPelicula){
+        appendChange(new PeliculaRemovida(idPelicula)).apply();
     }
 
-    public void cambiarTipoProyeccionDeSala(){
-
+    public void agregarEmpleado(Nombre nombre, Apellidos apellidos, Cargo cargo, FechaNacimiento fechaNacimiento, Telefono telefono){
+        appendChange(new EmpleadoAgregado(new IdEmpleado(), nombre, apellidos, cargo, fechaNacimiento, telefono)).apply();
     }
 
-    public void remplazarAsientoEnSala(){
-
+    public void removerEmpleado(IdEmpleado idEmpleado){
+        appendChange(new EmpleadoRemovido(idEmpleado));
     }
 
-    public void cambiarTipoAsientoEnSala(){
-
+    public void cambiarHorario(FechaInicio fechaInicio, FechaFin fechaFin, Set<Dia> dias){
+        appendChange(new HorarioCambiado(fechaInicio, fechaFin, dias)).apply();
     }
 
-    public void cambiarCargoEmpleado(){
-
+    public void agregarAsientoASala(IdSala idSala, Asiento asiento){
+        appendChange(new AsientoDeSalaAgregado(idSala, asiento)).apply();
     }
 
-    public void cambiarNumeroTelefonoEmpleado(){
+    public void cambiarTipoProyeccionSala(IdSala idSala, TipoProyeccion tipoProyeccion){
+        appendChange(new TipoProyeccionDeSalaCambiado(idSala, tipoProyeccion)).apply();
+    }
 
+    public void cambiarTipoAsientoEnSala(IdSala idSala, IdAsiento idAsiento, TipoAsiento tipoAsiento){
+        appendChange(new TipoAsientoEnSalaCambiado(idSala, idAsiento, tipoAsiento)).apply();
+    }
+
+    public void cambiarCargoEmpleado(IdEmpleado idEmpleado, Cargo cargo){
+        appendChange(new CargoEmpleadoCambiado(idEmpleado, cargo)).apply();
+    }
+
+    public void cambiarTelefonoEmpleado(IdEmpleado idEmpleado, Telefono telefono){
+        appendChange(new TelefonoEmpleadoCambiado(idEmpleado, telefono)).apply();
+    }
+
+    // ATRIBUTOS DEL AGREGADO
+    public Ubicacion ubicacion() {
+        return ubicacion;
+    }
+
+    public Horario horario() {
+        return horario;
+    }
+
+    public Set<IdPelicula> cartelera() {
+        return cartelera;
+    }
+
+    public Set<Empleado> empleados() {
+        return empleados;
+    }
+
+    public Set<Sala> salas() {
+        return salas;
     }
 }
