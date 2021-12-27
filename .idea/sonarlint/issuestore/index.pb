@@ -87,8 +87,6 @@ W
 'src/main/java/pelicula/values/Tipo.java,0\7\074c8449359d857a9e6fd42fd1730d681b6c8434
 [
 +src/main/java/cliente/values/IdCliente.java,f\d\fd97821b79b0bcc4f5492ac75f1ce8f928844f62
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 [
 +src/main/java/cine/events/SalaAgregada.java,3\7\377ae4cbe31f4195c2d5b047d0144b06b351d518
 _
