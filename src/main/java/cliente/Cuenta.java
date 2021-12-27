@@ -21,12 +21,20 @@ public class Cuenta extends Entity<IdCuenta> {
         this.tarjetaCineco = null;
     }
 
-    public void cambiarEmail(){
-
+    public void cambiarEmail(Email email){
+        this.email = email;
     }
 
-    public void cambiarPassword(){
+    public void cambiarPassword(Password password){
+        this.password = password;
+    }
 
+    public void agregarPuntos(Integer valor) {
+        this.puntuacion = new Puntuacion(this.puntuacion.value()+valor);
+    }
+
+    public void asociarTarjeta(TarjetaCineco tarjetaCineco){
+        this.tarjetaCineco = tarjetaCineco;
     }
 
     public Email email() {
@@ -39,5 +47,9 @@ public class Cuenta extends Entity<IdCuenta> {
 
     public Puntuacion puntuacion() {
         return puntuacion;
+    }
+
+    public TarjetaCineco tarjetaCineco() {
+        return tarjetaCineco;
     }
 }

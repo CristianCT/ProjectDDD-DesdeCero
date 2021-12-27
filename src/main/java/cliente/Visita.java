@@ -16,8 +16,8 @@ public class Visita extends Entity<IdVisita> {
         this.fecha = fecha;
     }
 
-    public void modificarDetalles(){
-
+    public void modificarDetalles(Detalles detalles){
+        this.detalles = detalles;
     }
 
     public Detalles detalles() {

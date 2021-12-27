@@ -29,12 +29,12 @@ public class TarjetaCineco extends Entity<IdTarjeta> {
         this.saldo = null;
     }
 
-    public void recargarSaldo(){
-
+    public void recargarSaldo(Double saldo){
+        this.saldo = new Saldo(this.saldo.value() + saldo);
     }
 
-    public void descontarSaldo(){
-
+    public void descontarSaldo(Double saldo){
+        this.saldo = new Saldo(this.saldo.value() - saldo);
     }
 
     public Membresia membresia() {
