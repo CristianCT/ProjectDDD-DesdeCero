@@ -24,12 +24,8 @@ public class Boleta extends Entity<IdBoleta> {
         this.pago = pago;
     }
 
-    public void cambiarAsiento(){
-
-    }
-
-    public void asociarPago(){
-
+    public void cambiarAsiento(IdAsiento idAsiento){
+        this.idAsiento = idAsiento;
     }
 
     public IdAsiento idAsiento() {

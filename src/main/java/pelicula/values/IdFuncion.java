@@ -6,6 +6,9 @@ public final class IdFuncion extends Identity {
     private IdFuncion(String valor){
         super(valor);
     }
+    public IdFuncion(){
+        super();
+    }
     public static IdFuncion of(String valor){
         return new IdFuncion(valor);
     }

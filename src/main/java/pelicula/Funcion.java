@@ -21,12 +21,16 @@ public class Funcion extends Entity<IdFuncion> {
         this.boletas = new HashSet<>();
     }
 
-    public void cambiarFecha(){
-
+    public void cambiarFecha(Fecha fecha){
+        this.fecha = fecha;
     }
 
-    public void cambiarPrecioBase(){
+    public void cambiarPrecioBase(PrecioBase precioBase){
+        this.precioBase = precioBase;
+    }
 
+    public void agregarBoleta(Boleta boleta){
+        this.boletas.add(boleta);
     }
 
     public PrecioBase precioBase() {

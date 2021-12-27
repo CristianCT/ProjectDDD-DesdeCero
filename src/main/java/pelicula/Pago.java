@@ -25,8 +25,8 @@ public class Pago extends Entity<IdPago> {
         this.descuento = descuento;
     }
 
-    public void cambiarAPagado(){
-
+    public void cambiarEstadoPagado(Pagado pagado){
+        this.pagado = pagado;
     }
 
     public IdEmpleado idEmpleado() {
