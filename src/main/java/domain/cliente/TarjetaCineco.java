@@ -3,6 +3,8 @@ package domain.cliente;
 import domain.cliente.values.*;
 import co.com.sofka.domain.generic.Entity;
 
+import java.util.Objects;
+
 public class TarjetaCineco extends Entity<IdTarjeta> {
 
     private final Membresia membresia;
@@ -13,20 +15,11 @@ public class TarjetaCineco extends Entity<IdTarjeta> {
 
     public TarjetaCineco(IdTarjeta entityId, Membresia membresia, CodigoCVC CVC, FechaExpedicion fechaExpedicion, FechaVencimiento fechaVencimiento, Saldo saldo) {
         super(entityId);
-        this.membresia = membresia;
-        this.CVC = CVC;
-        this.fechaExpedicion = fechaExpedicion;
-        this.fechaVencimiento = fechaVencimiento;
-        this.saldo = saldo;
-    }
-
-    public TarjetaCineco(IdTarjeta entityId, Membresia membresia, CodigoCVC CVC, FechaExpedicion fechaExpedicion, FechaVencimiento fechaVencimiento) {
-        super(entityId);
-        this.membresia = membresia;
-        this.CVC = CVC;
-        this.fechaExpedicion = fechaExpedicion;
-        this.fechaVencimiento = fechaVencimiento;
-        this.saldo = null;
+        this.membresia = Objects.requireNonNull(membresia, "La membresia no puede ser null");
+        this.CVC = Objects.requireNonNull(CVC, "El CVC no puede ser null");
+        this.fechaExpedicion = Objects.requireNonNull(fechaExpedicion, "La fecha de expedicion no puede ser null");
+        this.fechaVencimiento = Objects.requireNonNull(fechaVencimiento, "La fecha de vencimiento no puede ser null");
+        this.saldo = Objects.requireNonNull(saldo, "El saldo no puede ser null");
     }
 
     public void recargarSaldo(Double saldo){

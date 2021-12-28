@@ -5,6 +5,8 @@ import domain.cliente.values.IdVisita;
 import co.com.sofka.domain.generic.Entity;
 import domain.genericos.Fecha;
 
+import java.util.Objects;
+
 public class Visita extends Entity<IdVisita> {
 
     private Detalles detalles;
@@ -12,12 +14,12 @@ public class Visita extends Entity<IdVisita> {
 
     public Visita(IdVisita entityId, Detalles detalles, Fecha fecha) {
         super(entityId);
-        this.detalles = detalles;
-        this.fecha = fecha;
+        this.detalles = Objects.requireNonNull(detalles, "Los detalles no pueden ser null");
+        this.fecha = Objects.requireNonNull(fecha, "La fecha no puede ser null");
     }
 
     public void modificarDetalles(Detalles detalles){
-        this.detalles = detalles;
+        this.detalles = Objects.requireNonNull(detalles, "Los detalles no pueden ser null");
     }
 
     public Detalles detalles() {

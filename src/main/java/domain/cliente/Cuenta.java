@@ -6,6 +6,8 @@ import domain.cliente.values.Password;
 import domain.cliente.values.Puntuacion;
 import co.com.sofka.domain.generic.Entity;
 
+import java.util.Objects;
+
 public class Cuenta extends Entity<IdCuenta> {
 
     private Email email;
@@ -15,18 +17,18 @@ public class Cuenta extends Entity<IdCuenta> {
 
     public Cuenta(IdCuenta entityId, Email email, Password password, Puntuacion puntuacion) {
         super(entityId);
-        this.email = email;
-        this.password = password;
-        this.puntuacion = puntuacion;
+        this.email = Objects.requireNonNull(email, "El email no puede ser null");
+        this.password = Objects.requireNonNull(password, "La Password no puede ser null");
+        this.puntuacion = Objects.requireNonNull(puntuacion, "La puntuacion no puede ser null");
         this.tarjetaCineco = null;
     }
 
     public void cambiarEmail(Email email){
-        this.email = email;
+        this.email = Objects.requireNonNull(email, "El email no puede ser null");
     }
 
     public void cambiarPassword(Password password){
-        this.password = password;
+        this.password = Objects.requireNonNull(password, "La Password no puede ser null");
     }
 
     public void agregarPuntos(Integer valor) {
@@ -34,7 +36,7 @@ public class Cuenta extends Entity<IdCuenta> {
     }
 
     public void asociarTarjeta(TarjetaCineco tarjetaCineco){
-        this.tarjetaCineco = tarjetaCineco;
+        this.tarjetaCineco = Objects.requireNonNull(tarjetaCineco, "La terjeta no puede ser null");
     }
 
     public Email email() {

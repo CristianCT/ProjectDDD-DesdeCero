@@ -8,6 +8,8 @@ import domain.pelicula.values.IdPago;
 import domain.pelicula.values.Metodo;
 import domain.pelicula.values.Pagado;
 
+import java.util.Objects;
+
 public class Pago extends Entity<IdPago> {
 
     private final IdEmpleado idEmpleado;
@@ -18,15 +20,15 @@ public class Pago extends Entity<IdPago> {
 
     public Pago(IdPago entityId, IdEmpleado idEmpleado, Fecha fecha, Pagado pagado, Metodo metodo, Descuento descuento) {
         super(entityId);
-        this.idEmpleado = idEmpleado;
-        this.fecha = fecha;
-        this.pagado = pagado;
-        this.metodo = metodo;
-        this.descuento = descuento;
+        this.idEmpleado = Objects.requireNonNull(idEmpleado, "El ID del responsable no puede ser null");
+        this.fecha = Objects.requireNonNull(fecha, "La fecha no puede ser null");
+        this.pagado = Objects.requireNonNull(pagado, "El estado del pago no puede ser null");
+        this.metodo = Objects.requireNonNull(metodo, "El metodo de pago no puede ser null");
+        this.descuento = Objects.requireNonNull(descuento, "El descuento no puede ser null");
     }
 
     public void cambiarEstadoPagado(Pagado pagado){
-        this.pagado = pagado;
+        this.pagado = Objects.requireNonNull(pagado, "El estado del pago no puede ser null");
     }
 
     public IdEmpleado idEmpleado() {

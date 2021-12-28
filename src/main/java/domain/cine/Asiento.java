@@ -4,6 +4,8 @@ import domain.cine.values.*;
 import co.com.sofka.domain.generic.Entity;
 import domain.genericos.PrecioBase;
 
+import java.util.Objects;
+
 public class Asiento extends Entity<IdAsiento> {
 
     private Fila fila;
@@ -13,14 +15,14 @@ public class Asiento extends Entity<IdAsiento> {
 
     public Asiento(IdAsiento entityId, Fila fila, Columna columna, PrecioBase precioBase, TipoAsiento tipoAsiento) {
         super(entityId);
-        this.fila = fila;
-        this.columna = columna;
-        this.precioBase = precioBase;
-        this.tipoAsiento = tipoAsiento;
+        this.fila = Objects.requireNonNull(fila, "La fila no puede ser null");
+        this.columna = Objects.requireNonNull(columna, "La columna no puede ser null");
+        this.precioBase = Objects.requireNonNull(precioBase, "El precio base no puede ser null");
+        this.tipoAsiento = Objects.requireNonNull(tipoAsiento, "El tipo de asiento no puede ser null");
     }
 
     public void cambiarTipoAsiento(TipoAsiento tipoAsiento){
-        this.tipoAsiento = tipoAsiento;
+        this.tipoAsiento = Objects.requireNonNull(tipoAsiento, "El tipo de asiento no puede ser null");
     }
 
     public Fila fila() {

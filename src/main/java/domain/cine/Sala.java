@@ -6,6 +6,7 @@ import domain.cine.values.TipoProyeccion;
 import co.com.sofka.domain.generic.Entity;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Sala extends Entity<IdSala> {
@@ -16,17 +17,17 @@ public class Sala extends Entity<IdSala> {
 
     public Sala(IdSala entityId, Numeral numeral, TipoProyeccion tipoProyeccion) {
         super(entityId);
-        this.numeral = numeral;
-        this.tipoProyeccion = tipoProyeccion;
+        this.numeral = Objects.requireNonNull(numeral, "El numeral no puede ser null");
+        this.tipoProyeccion = Objects.requireNonNull(tipoProyeccion, "El tipo de proyeccion no puede ser null");
         this.asientos = new HashSet<>();
     }
 
     public void agregarAsiento(Asiento asiento){
-        this.asientos.add(asiento);
+        this.asientos.add(Objects.requireNonNull(asiento, "El asiento no puede ser null"));
     }
 
     public void cambiarTipoProyeccion(TipoProyeccion tipoProyeccion){
-        this.tipoProyeccion = tipoProyeccion;
+        this.tipoProyeccion = Objects.requireNonNull(tipoProyeccion, "El tipo de proyeccion no puede ser null");;
     }
 
     public Numeral numeral() {
