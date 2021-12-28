@@ -1,5 +1,6 @@
 package domain.pelicula;
 
+import co.com.sofka.domain.generic.DomainEvent;
 import domain.cine.values.IdAsiento;
 import domain.cliente.values.IdCliente;
 import co.com.sofka.domain.generic.AggregateEvent;
@@ -9,6 +10,7 @@ import domain.pelicula.events.*;
 import domain.pelicula.values.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Pelicula extends AggregateEvent<IdPelicula> {
@@ -26,6 +28,17 @@ public class Pelicula extends AggregateEvent<IdPelicula> {
         this.duracion = duracion;
         this.categoria = categoria;
         this.funciones = new HashSet<>();
+    }
+
+    private Pelicula(IdPelicula idPelicula){
+        super(idPelicula);
+        subscribe(new PeliculaChange(this));
+    }
+
+    public static Pelicula from(IdPelicula idPelicula, List<DomainEvent> retrieveEvents) {
+        var pelicula = new Pelicula(idPelicula);
+        retrieveEvents.forEach(pelicula::applyEvent);
+        return pelicula;
     }
 
 

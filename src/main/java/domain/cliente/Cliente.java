@@ -1,10 +1,12 @@
 package domain.cliente;
 
+import co.com.sofka.domain.generic.DomainEvent;
 import domain.cliente.events.*;
 import domain.cliente.values.*;
 import co.com.sofka.domain.generic.AggregateEvent;
 import domain.genericos.*;
 
+import java.util.List;
 import java.util.Set;
 
 public class Cliente extends AggregateEvent<IdCliente> {
@@ -20,6 +22,17 @@ public class Cliente extends AggregateEvent<IdCliente> {
         super(entityId);
         subscribe(new ClienteChange(this));
         appendChange(new ClienteCreado(nombre, apellidos, fechaNacimiento, telefono)).apply();
+    }
+
+    private Cliente(IdCliente idCliente){
+        super(idCliente);
+        subscribe(new ClienteChange(this));
+    }
+
+    public static Cliente from(IdCliente idCliente, List<DomainEvent> retrieveEvents) {
+        var cliente = new Cliente(idCliente);
+        retrieveEvents.forEach(cliente::applyEvent);
+        return cliente;
     }
 
     public void cambiarEmailCuenta(Email email){
